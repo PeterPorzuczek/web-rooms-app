@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="#" layout:decorator="layout">
+	<head>
+		<title>Rooms - Create Unit</title>
+	</head>
+	
+	<body>
+    	<div layout:fragment="content">
+
+        	<div class="cd-tabs" style="overflow:hidden !important; height:1.3% !important;">
+				<ul class="cd-tabs-content">
+					<li data-content="inbox" class="selected" style="padding:0px 10px 10px 10px !important">
+        				<form class="cd-form floating-labels" th:action="@{/unit/add}" th:object="${unit}" action="/unit/add" method="post">
+							
+							<fieldset>
+								<legend>Add Unit</legend>
+
+		    					<div class="icon">
+									<label class="cd-label" for="cd-name">Name</label>
+									<input class="user" type="text" name="cd-name" id="cd-name" th:field="*{name}" required="required" />
+		    					</div> 
+		    					
+		    					<div class="icon">
+									<label class="cd-label" for="cd-name">Address</label>
+									<input class="user" type="text" name="cd-name" id="cd-name" th:field="*{address}"/>
+		    					</div> 
+
+							</fieldset>
+
+							<fieldset>
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Organization</h4>
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{organization.id}" sec:authorize="hasRole('ROLE_ADMIN')">
+  											<option th:each="o: ${organizationList}" th:value="${o.id}" th:text="${o.name}"></option>
+										</select>
+									</p>
+								</div> 
+								
+            					<input type="hidden" th:field="*{id}"/>
+            					
+								<div>
+		      						<input class="full-width" type="submit" value="Create" />
+		    					</div>
+
+							</fieldset>
+							  
+    						<div class="success-message-ed" th:if="${#httpServletRequest.getParameter('updated')}">
+		    					<p>You successfully created user</p>
+		 					</div>
+		 					
+		 					<div class="error-message-ed" th:if="${#httpServletRequest.getParameter('error')}">
+		    					<p>Name already used, Please enter another name</p>
+		 					</div>
+        
+        					<div class="error-message-ed"  th:if="${#fields.hasErrors()}">
+								<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+							</div>
+							
+						</form>
+						
+					</li>
+					
+				</ul> <!-- cd-tabs-content -->
+				
+			</div> <!-- cd-tabs -->
+			
+    	</div>
+    	
+	</body>
+</html>

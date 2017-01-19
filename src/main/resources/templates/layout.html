@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="#">
+
+	<head>
+    	<title>Layout</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- MATERIAL STYLE -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" />
+
+    	<!-- MATERIAL DATATABLE STYLE -->	
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.material.min.css" />
+		
+   		<!-- CUSTOM STYLES -->
+		<link rel="stylesheet" th:href="@{/css/reset.css}" />
+		<link rel="stylesheet" th:href="@{/css/style-dash-layout.css}" />
+		
+		<!-- BOOTSTRAP STYLE -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
+ 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Miriam+Libre:400,700|Source+Sans+Pro:200,400,700,600,400italic,700italic" rel="stylesheet" />
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css' />
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css' />
+		
+		<!-- MATERIAL ICONS -->	
+		<link rel="stylesheet" th:href="@{/css/material-icons.css}" />
+	
+		<!-- MODERNIZR SCRIPT -->
+		<script th:src="@{/js/modernizr.js}"></script>
+    
+   		<!-- JQUERY SCRIPTS -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script th:src="@{/js/jquery.menu-aim.js}"></script>
+ 		
+		<!-- RESPONSIVE DATATABLE SCRIPT -->	 
+		<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+			
+		<!-- CUSTOM SCRIPT -->
+		<script th:src="@{/js/main.js}"></script>
+	</head>
+	
+	<body>
+    	<header class="cd-main-header">
+			<a href="#0" class="cd-logo"><img th:src="@{/assets/img-dashlogo.svg}" alt="Logo" /></a>
+		
+			<!-- <div class="cd-search is-hidden">
+				<form action="#0">
+					<input type="search" placeholder="Search..." />
+				</form>
+			</div> --> <!-- cd-search -->
+
+			<a href="#0" class="cd-nav-trigger">Menu<span></span></a> <!-- mobile -->
+
+			<nav class="cd-nav">
+				<ul class="cd-top-nav">
+					<li class="has-children account">
+						<a href="" class="pull-right" th:if="${g_account}">
+							<img th:src="@{/assets/cd-avatar.svg}" alt="avatar" />
+                        	<span th:text="${g_account.userName}"></span>
+						</a>
+
+						<ul>
+							<li><a th:href="@{/account/edit/0}" href="/account/edit">Edit profile</a></li>
+							<li><a th:href="@{/logout}" href="logout">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</header> <!-- .cd-main-header -->
+
+		<main class="cd-main-content">
+			<nav class="cd-side-nav">
+				<ul>
+					<li class="cd-label">Main</li>
+					<li class="overview" th:classappend="${#httpServletRequest.requestURI=='/'}? active" >
+						<a th:href="@{/}" href="/">Dashboard</a>
+					</li>
+					<li class="bookmarks" th:classappend="${#httpServletRequest.requestURI=='/book/unit/'}? active" >
+						<a th:href="@{/book/unit/}" href="/book/unit/">Booking</a>
+					</li>
+					<li class="bookmarks" th:classappend="${#httpServletRequest.requestURI=='/event/list/'}? active" >
+						<a th:href="@{/event/list/}" href="/event/list/">My Reservations</a>
+					</li>
+
+				</ul>
+                
+                <ul>
+					<li class="cd-label" sec:authorize="hasRole('ROLE_ADMIN')">Admin</li>
+					
+					<li class="has-children users" sec:authorize="hasRole('ROLE_ADMIN')">
+						<a href="#">Accounts</a>
+					
+						<ul>
+							<li th:class="${#httpServletRequest.requestURI=='/account/list'}? active"><a th:href="@{/account/list}" href="account/list">All Accounts</a></li>
+							<li th:class="${#httpServletRequest.requestURI=='/account/register'}? active"><a th:href="@{/account/register}" href="account/register">Add Account</a></li>
+						</ul>
+					</li>
+					<li class="has-children users" sec:authorize="hasRole('ROLE_ADMIN')">
+						<a href="#">Organizations</a>
+					
+						<ul>
+							<li th:class="${#httpServletRequest.requestURI=='/organization/list'}? active"><a th:href="@{/organization/list}" href="organization/list">All Organizations</a></li>
+							<li th:class="${#httpServletRequest.requestURI=='/organization/add'}? active"><a th:href="@{/organization/add}" href="organization/add">Add Organization</a></li>
+						</ul>
+					</li>
+					<li class="has-children bookmarks" sec:authorize="hasRole('ROLE_ADMIN')">
+						<a href="#">Units</a>
+					
+						<ul>
+							<li th:class="${#httpServletRequest.requestURI=='/unit/list'}? active"><a th:href="@{/unit/list}" href="unit/list">All Units</a></li>
+							<li th:class="${#httpServletRequest.requestURI=='/unit/add'}? active"><a th:href="@{/unit/add}" href="unit/add">Add Unit</a></li>
+						</ul>
+					</li>
+					<li class="has-children bookmarks" sec:authorize="hasRole('ROLE_ADMIN')">
+						<a href="#">Rooms</a>
+					
+						<ul>
+							<li th:class="${#httpServletRequest.requestURI=='/room/list'}? active"><a th:href="@{/room/list}" href="room/list">All Rooms</a></li>
+							<li th:class="${#httpServletRequest.requestURI=='/room/add'}? active"><a th:href="@{/room/add}" href="room/add">Add Room</a></li>
+						</ul>
+					</li>
+					<li class="bookmarks" th:classappend="${#httpServletRequest.requestURI=='/event/list/all/'}? active"  sec:authorize="hasRole('ROLE_ADMIN')">
+						<a th:href="@{/event/list/all/}" href="/event/list/all/">All Reservations</a>
+					</li>
+				</ul>
+
+				<ul>
+					<li class="cd-label">Shortcuts</li>
+					<li class="action-btn"><a th:href="@{/logout}" href="logout">Logout</a></li>
+					<li class="action-btn" ><a id="clocktext" style="font-size:10pt; font-kerning:none; background: #e4e4e4; color: #585b63; pointer-events: none;"></a></li>
+					<script type="text/javascript">
+						"use strict";
+			
+						var textElem = document.getElementById("clocktext");
+						var textNode = document.createTextNode("");
+						textElem.appendChild(textNode);
+						var curFontSize = 24;  // Do not change
+		
+						function updateClock() {
+							var d = new Date();
+							var s = "";
+							s += (10 > d.getHours  () ? "0" : "") + d.getHours  () + ":";
+							s += (10 > d.getMinutes() ? "0" : "") + d.getMinutes() + ":";
+							s += (10 > d.getSeconds() ? "0" : "") + d.getSeconds();
+							textNode.data = s;
+							setTimeout(updateClock, 1000 - d.getTime() % 1000 + 20);
+						}
+			
+						function updateTextSize() {
+							var targetWidth = 0.9;  // Proportion of full screen width
+							for (var i = 0; 3 > i; i++) {  // Iterate for better better convergence
+								var newFontSize = textElem.parentNode.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
+								textElem.style.fontSize = newFontSize.toFixed(3) + "pt";
+								curFontSize = newFontSize;
+							}
+						}
+			
+						updateClock();
+						/* updateTextSize();
+						window.addEventListener("resize", updateTextSize); */
+					</script>
+				</ul>
+
+			</nav>
+			
+			<div layout:fragment="content" class="content-wrapper">
+				<!-- Content goes here -->
+			</div>
+
+		</main> <!-- .cd-main-content -->
+    	
+	</body>
+	
+</html>

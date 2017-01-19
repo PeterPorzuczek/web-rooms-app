@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="#" layout:decorator="layout">
+	<head>
+		<title>Rooms - Edit room information</title>
+	</head>
+	
+	<body>
+    	<div layout:fragment="content">
+        
+        	<!-- <h2 class="form-signin-heading">Edit <span th:text="${account.userName}"></span> account</h2> -->
+        	
+        	<div class="cd-tabs" style="overflow:hidden !important; height:1.3% !important;">
+				<ul class="cd-tabs-content">
+					<li data-content="inbox" class="selected" style="padding:0px 10px 10px 10px !important">
+        				<form class="cd-form floating-labels" th:action="@{/room/edit}" th:object="${room}" method="post">
+							
+							<fieldset>
+								<legend>Edit Room information</legend>
+
+		    					<div class="icon">
+									<label class="cd-label" for="cd-name">Name</label>
+									<input class="user" type="text" name="cd-name" id="cd-name" th:field="*{name}" required="required" />
+		    					</div> 
+		    					
+		    					<div class="icon">
+									<label class="cd-label" for="cd-name">Positions</label>
+									<input class="user" type="text" name="cd-name" id="cd-name" th:field="*{positions}"/>
+		    					</div> 
+		    					
+		    					<div class="icon">
+									<label class="cd-label" for="cd-name">Computers</label>
+									<input class="user" type="text" name="cd-name" id="cd-name" th:field="*{computers}"/>
+		    					</div> 
+
+							</fieldset>
+
+							<fieldset>
+							
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Unit</h4>
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{unit.id}" sec:authorize="hasRole('ROLE_ADMIN')">
+  											<option th:each="u: ${unitList}" th:value="${u.id}" th:text="${u.name}"></option>
+										</select>
+									</p>
+								</div> 
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Network</h4>
+
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{network}" sec:authorize="hasRole('ROLE_ADMIN')">
+											<option disabled="true" selected="selected" value="${room.network}"></option>
+  											<option value="YES">Yes</option>
+  											<option value="NO">No</option>
+										</select>
+									</p>
+								</div> 
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Projector</h4>
+
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{projector}" sec:authorize="hasRole('ROLE_ADMIN')">
+											<option disabled="true" selected="selected" value="${room.projector}"></option>
+  											<option value="YES">Yes</option>
+  											<option value="NO">No</option>
+										</select>
+									</p>
+								</div> 
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Speakers</h4>
+
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{speakers}" sec:authorize="hasRole('ROLE_ADMIN')">
+											<option disabled="true" selected="selected" value="${room.speakers}"></option>
+  											<option value="YES">Yes</option>
+  											<option value="NO">No</option>
+										</select>
+									</p>
+								</div> 
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Conditioning</h4>
+
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{conditioning}" sec:authorize="hasRole('ROLE_ADMIN')">
+											<option disabled="true" selected="selected" value="${room.conditioning}"></option>
+  											<option value="YES">Yes</option>
+  											<option value="NO">No</option>
+										</select>
+									</p>
+								</div> 
+								
+								<div>
+									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Board</h4>
+
+									<p class="cd-select icon">
+										<select class="budget" th:field="*{board}" sec:authorize="hasRole('ROLE_ADMIN')">
+											<option disabled="true" selected="selected" value="${room.board}"></option>
+  											<option value="YES">Yes</option>
+  											<option value="NO">No</option>
+										</select>
+									</p>
+								</div> 
+								
+								<input type="hidden" th:field="*{id}"/>
+										
+								<div>
+		      						<input class="full-width" type="submit" value="Save" />
+		    					</div>
+
+							</fieldset>	 
+							 
+    						<div class="success-message-ed" th:if="${#httpServletRequest.getParameter('updated')}">
+		    					<p>You successfully updated room</p>
+		 					</div>
+		 						
+		 					<div class="error-message-ed" th:if="${#httpServletRequest.getParameter('error')}">
+		    					<p>Error</p>
+		 					</div>
+        
+        					<div class="error-message-ed"  th:if="${#fields.hasErrors()}">
+								<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+								<p th:if="${#fields.hasErrors('positions')}" th:errors="*{positions}">Positions error</p>
+								<p th:if="${#fields.hasErrors('computers')}" th:errors="*{computers}">Computers error</p>
+							</div>
+							
+						</form>
+						
+					</li>
+					
+				</ul> <!-- cd-tabs-content -->
+				
+			</div> <!-- cd-tabs -->
+			
+    	</div>
+    	
+	</body>
+</html>

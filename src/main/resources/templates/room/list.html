@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="#" layout:decorator="layout">
+	<head>
+		<title>Rooms - List rooms</title>
+		
+		<!-- MATERIALIZE SCRIPT -->	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+		
+		<!-- MATERIALIZE CUSTOM STYLE -->	
+		<link rel="stylesheet" th:href="@{/css/materialize.min.css}" />
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+				$(document).ready(function() {
+					  $('#datatable-rooms').dataTable({
+						"data": /*[[${rooms}]]*/,
+					    "oLanguage": {
+					      "sStripClasses": "",
+					      "sSearch": "",
+					      "sSearchPlaceholder": "Enter Keywords Here",
+					      "sInfo": "_START_ -_END_ of _TOTAL_",
+					      "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
+					        '<option value="10">10</option>' +
+					        '<option value="20">20</option>' +
+					        '<option value="30">30</option>' +
+					        '<option value="40">40</option>' +
+					        '<option value="50">50</option>' +
+					        '<option value="-1">All</option>' +
+					        '</select></div>'
+					    },
+					    bAutoWidth: false
+					  });
+				});
+			/*]]>*/
+		</script>
+	</head>
+	
+	<body>
+    	<div layout:fragment="content" class="content-wrapper-special" style="padding-top: 45px !important">
+    	
+			<main class="cd-main-content-home" style="padding: 15px 15px 15px 15px !important">
+        		<div class="card material-table">
+      				<div class="table-header">
+       					<span class="table-title">All rooms</span>
+       					<div class="actions">
+       						<a th:href="@{/room/list/export}" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">import_export</i></a>
+          					<a th:href="@{/room/add}" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">home</i></a>
+          					<a href="#" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+        				</div>
+      				</div>
+      				<div class="table-responsive">
+	     				<table id="datatable-rooms" >
+	        				<thead>
+	       						<tr>
+	       							<th style="color:#ffffff !important"></th>
+	           						<th>Name</th>  
+	           						<th>Unit</th>
+									<th>Seats</th>      						
+	            					<th>Comp</th>
+	            					<th>Net</th>
+	            					<th>Video</th>
+	            					<th>Audio</th>
+	            					<th>Air</th>
+	            					<th>Board</th>
+	            					<th>Event</th>
+	            					<th style="color:#ffffff !important"></th>
+	          					</tr>
+	       	 				</thead>
+	      				</table>	
+      				</div>			
+    			</div>
+        	</main>
+        	
+    	</div>
+	</body>
+</html>

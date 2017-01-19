@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="235px" height="236px" viewBox="0 0 235 236" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/HomeAlt" transform="translate(-518.000000, -207.000000)">
+            <g id="LogoVertical" transform="translate(400.000000, 207.000000)">
+                <g id="Icon" transform="translate(118.000000, 0.000000)">
+                    <rect id="Room3" fill="#FB5E58" x="155.973451" y="98.7665198" width="78.3999099" height="137.045337" rx="16"></rect>
+                    <rect id="Room2" fill="#572AA7" x="0" y="98.7665198" width="129.610831" height="137.045337" rx="16"></rect>
+                    <rect id="Room1" fill="#FAB10E" x="0" y="0" width="233.619086" height="74.0291824" rx="16"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

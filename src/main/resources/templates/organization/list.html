@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="#" layout:decorator="layout">
+	<head>
+		<title>Rooms - List organizations</title>
+		
+		<!-- MATERIALIZE SCRIPT -->	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+		
+		<!-- MATERIALIZE CUSTOM STYLE -->	
+		<link rel="stylesheet" th:href="@{/css/materialize.min.css}" />
+		
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+				$(document).ready(function() {
+					  $('#datatable-organizations').dataTable({
+						"data": /*[[${organizations}]]*/,
+					    "oLanguage": {
+					      "sStripClasses": "",
+					      "sSearch": "",
+					      "sSearchPlaceholder": "Enter Keywords Here",
+					      "sInfo": "_START_ -_END_ of _TOTAL_",
+					      "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
+					        '<option value="10">10</option>' +
+					        '<option value="20">20</option>' +
+					        '<option value="30">30</option>' +
+					        '<option value="40">40</option>' +
+					        '<option value="50">50</option>' +
+					        '<option value="-1">All</option>' +
+					        '</select></div>'
+					    },
+					    bAutoWidth: false
+					  });
+				});
+			/*]]>*/
+		</script>
+	</head>
+	
+	<body>
+    	<div layout:fragment="content" class="content-wrapper-special" style="padding-top: 45px !important">
+    	
+			<main class="cd-main-content-home" style="padding: 15px 15px 15px 15px !important">
+        		<div class="card material-table">
+      				<div class="table-header">
+       					<span class="table-title">All organizations <a style="font-size:10px" th:href="@{/account/list/group}" href="account/list/group">All Accounts with organization names </a><span style="font-size:10px"> | </span><a style="font-size:10px" th:href="@{/unit/list}" href="unit/list">All Units with organization names</a></span>
+       					<div class="actions">
+       						<a th:href="@{/organization/list/export}" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">import_export</i></a>
+          					<a th:href="@{/organization/add}" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">group_work</i></a>
+          					<a href="#" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+        				</div>
+      				</div>
+      				<div class="table-responsive">
+	     				<table id="datatable-organizations">
+	        				<thead>
+	       						<tr>
+	       							<th style="color:#ffffff !important"></th>
+	           						<th>Name</th>  
+									<th>Members</th>   
+									<th>Units</th>    						
+	            					<th style="color:#ffffff !important"></th>
+	          					</tr>
+	       	 				</thead>
+	      				</table>	
+      				</div>			
+    			</div>
+        	</main>
+        	
+    	</div>
+	</body>
+</html>

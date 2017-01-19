@@ -1,0 +1,107 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<title>Rooms</title>
+
+		<!-- CUSTOM STYLES-->
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		
+		<!-- GOOGLE FONTS-->
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css' />
+
+		<!-- MODERNIZR SCRIPT -->
+		<script src="../js/modernizr.js"></script>
+		
+		<!-- JQUERY SCRIPT -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		
+		<!-- CUSTOM SCRIPT -->
+		<script src="../js/main.js"></script>
+	</head>
+
+	<body>
+			<div class="cd-bg-video-wrapper" data-video="assets/video">
+				<!-- video element will be loaded using jQuery -->
+			</div>
+		<header role="banner">
+			<div id="cd-logo"><a href="#"><img src="assets/img-navlogo.svg" alt="Logo" /></a></div>
+			<nav class="main-nav">
+				<ul>
+					<li><a class="cd-signin" href="#">Sign in</a></li>
+				</ul>
+			</nav>
+		</header>
+		
+ 		<section class="cd-intro" >
+			<div class="cd-intro-content parallax">
+				<div class="action-wrapper">
+					<a href="#" class="cd-btn first-action"></a>
+				</div>
+				<p>
+				</p>
+				<div class="action-wrapper">
+					<a href="#" class="cd-btn second-action"></a>
+				</div>
+				<p>
+				</p>
+				<div class="action-wrapper">
+					<div class="action-wrapper">
+						<a class="cd-btn main-action" href="#" >Sign in</a>
+					</div>
+					<a class="cd-btn" th:href="@{/calendar/room}">Check room</a>
+				</div>
+			</div>
+ 		</section>
+		
+	</body>
+	
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+
+			<div id="cd-login"> <!-- log in form -->
+				<form class="cd-form" th:action="@{/welcome}" th:object="${account}" action="/welcome" method="post">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="inputEmail" name="username" placeholder="Username or Email" required="required" autofocus="autofocus"/>
+						<!-- <span class="cd-error-message" th:if="${param.error}">Error, Something is wrong!</span> -->
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" id="inputPassword" name="password" type="password"  placeholder="Password" required="required"/>
+						<a href="#0" class="hide-password">Show</a>
+						<!-- <span class="cd-error-message" th:if="${param.error}">Error, Something is wrong!</span> -->
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="remember-me" name="remember-me"/>
+						<label for="remember-me">Remember me</label>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width" type="submit" value="Login" />
+					</p>
+				</form>
+				
+				<!-- <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p> -->
+				<a href="#0" class="cd-close-form">Close</a>
+			</div> <!-- cd-login -->
+		</div> <!-- cd-user-modal-container -->
+	</div> <!-- cd-user-modal -->	
+	
+	<div class="cd-popup" role="alert">
+		<div class="cd-popup-container">
+			<p>Email and password is incorrect or your account is not activated, please try again.</p>
+			<!-- <ul class="cd-buttons">
+				<li><a href="#0">ok</a></li>
+			</ul> -->
+			<a href="#0" class="cd-popup-close img-replace"></a>
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+</html>
