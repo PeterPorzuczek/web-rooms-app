@@ -84,67 +84,71 @@ public class InitDefaultData {
 		for(Account a : accounts) {        
 			accountService.register(a);
 		}
-		
-		List<Unit> units = new ArrayList<Unit>();
-		Unit unit;
-		
-		unit = new Unit();
-		unit.setName("Building A");
-		unit.setAddress("Armii Krajowej 101 81-824 Sopot");
-		unit.setOrganization(organizations.get(0));
-		units.add(unit);
-		
-		unit = new Unit();
-		unit.setName("Building B");
-		unit.setAddress("Armii Krajowej 101 81-824 Sopot");
-		unit.setOrganization(organizations.get(0));
-		units.add(unit);
-		
-		for(Unit u : units) {        
-			unitService.add(u);
+		try {
+			List<Unit> units = new ArrayList<Unit>();
+			Unit unit;
+			
+			unit = new Unit();
+			unit.setName("Building A");
+			unit.setAddress("Armii Krajowej 101 81-824 Sopot");
+			unit.setOrganization(organizations.get(0));
+			units.add(unit);
+			
+			unit = new Unit();
+			unit.setName("Building B");
+			unit.setAddress("Armii Krajowej 101 81-824 Sopot");
+			unit.setOrganization(organizations.get(0));
+			units.add(unit);
+			
+			for(Unit u : units) {        
+				unitService.add(u);
+			}
+			
+			List<Room> rooms = new ArrayList<Room>();
+			Room room;
+			
+			room = new Room();
+			room.setName("Room 1");
+			room.setPositions(10);
+			room.setComputers(1);
+			room.setBoard("NO");
+			room.setConditioning("NO");
+			room.setNetwork("YES");
+			room.setProjector("NO");
+			room.setSpeakers("NO");
+			room.setUnit(unitService.findByName("Building A"));
+			rooms.add(room);
+			
+			room = new Room();
+			room.setName("Room 2");
+			room.setPositions(30);
+			room.setComputers(30);
+			room.setBoard("YES");
+			room.setConditioning("NO");
+			room.setNetwork("YES");
+			room.setProjector("NO");
+			room.setSpeakers("NO");
+			room.setUnit(unitService.findByName("Building A"));
+			rooms.add(room);
+	
+			room = new Room();
+			room.setName("Room 333");
+			room.setPositions(50);
+			room.setComputers(1);
+			room.setBoard("YES");
+			room.setConditioning("NO");
+			room.setNetwork("YES");
+			room.setProjector("NO");
+			room.setSpeakers("NO");
+			room.setUnit(unitService.findByName("Building B"));
+			rooms.add(room);
+			
+			for(Room r : rooms) {        
+				roomService.add(r);
+			}
 		}
-		
-		List<Room> rooms = new ArrayList<Room>();
-		Room room;
-		
-		room = new Room();
-		room.setName("Room 1");
-		room.setPositions(10);
-		room.setComputers(1);
-		room.setBoard("NO");
-		room.setConditioning("NO");
-		room.setNetwork("YES");
-		room.setProjector("NO");
-		room.setSpeakers("NO");
-		room.setUnit(unitService.findByName("Building A"));
-		rooms.add(room);
-		
-		room = new Room();
-		room.setName("Room 2");
-		room.setPositions(30);
-		room.setComputers(30);
-		room.setBoard("YES");
-		room.setConditioning("NO");
-		room.setNetwork("YES");
-		room.setProjector("NO");
-		room.setSpeakers("NO");
-		room.setUnit(unitService.findByName("Building A"));
-		rooms.add(room);
-
-		room = new Room();
-		room.setName("Room 333");
-		room.setPositions(50);
-		room.setComputers(1);
-		room.setBoard("YES");
-		room.setConditioning("NO");
-		room.setNetwork("YES");
-		room.setProjector("NO");
-		room.setSpeakers("NO");
-		room.setUnit(unitService.findByName("Building B"));
-		rooms.add(room);
-		
-		for(Room r : rooms) {        
-			roomService.add(r);
+		catch(Exception e){
+			log.debug("Section works only on first run on db creation");
 		}
 		//*/
 		log.debug("Init default done");
