@@ -8,7 +8,6 @@ Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Ca
 	<img src="http://i.imgur.com/nd611B5.gif" alt="app-preview" width="640" height="360">
 </div>
 
-## How to run `web-rooms-app`
 To run application use
 ----
 	$ ./mvnw spring-boot:run
