@@ -12,7 +12,6 @@ Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Ca
 To run application use
 ----
 	$ ./mvnw spring-boot:run
-----
 
 To compile application use
 ----
