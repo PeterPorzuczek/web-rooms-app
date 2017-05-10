@@ -9,7 +9,12 @@ Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Ca
 </div>
 
 ## How to run `web-rooms-app`
-[indent=0]
+To run application use
 ----
 	$ ./mvnw spring-boot:run
+----
+
+To compile application use
+----
+	$ ./mvnw clean install
 ----
