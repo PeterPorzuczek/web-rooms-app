@@ -50,7 +50,6 @@ public class UnitController {
 	  try {
 			response.flushBuffer();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	  Gson gson = new GsonBuilder().setPrettyPrinting().create();

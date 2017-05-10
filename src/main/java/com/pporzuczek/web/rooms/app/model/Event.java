@@ -20,7 +20,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-//@ToString
 public class Event {
 	
 	@Id
@@ -46,8 +45,6 @@ public class Event {
     private Account account;
 	
 	public Event(String title, String description, String speaker, Date start, Date end, Room room, Account account) {
-//	public Event(String title, String description, String speaker, Date start, Date end, Account account) {
-//	public Event(String title, String description, String speaker, Date start, Date end) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -64,18 +61,4 @@ public class Event {
 				+ description + ", speaker=" + speaker + ", start=" + start
 				+ ", stop=" + end + ", room=" + room + ", account=" + account + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "Event [id=" + id + ", title=" + title + ", description="
-//				+ description + ", speaker=" + speaker + ", start=" + start
-//				+ ", stop=" + end  + ", account=" + account + "]";
-//	}
-	
-//	@Override
-//	public String toString() {
-//		return "Event [id=" + id + ", title=" + title + ", description="
-//				+ description + ", speaker=" 
-//				+ speaker + ", start=" + start + ", stop=" + end + "]";
-//	}
 }

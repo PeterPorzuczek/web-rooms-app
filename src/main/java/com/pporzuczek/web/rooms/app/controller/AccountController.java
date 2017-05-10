@@ -150,6 +150,7 @@ public class AccountController {
 	   account.setLastName(a.getLastName());
 	   account.setRole(a.getRole());
 	   account.setOrganization(a.getOrganization());
+
 	   
 		List<Organization> organizationList = organizationService.list();
 		model.addAttribute("organizationList", organizationList);
@@ -167,6 +168,7 @@ public class AccountController {
 	   if(accountService.getLoggedInAccount().isAdmin()) {
 		   accountService.updateAccount(account);
 	   } else {
+		   account.setOrganization(accountService.getLoggedInAccount().getOrganization());
 		   accountService.updateAccount(accountService.getLoggedInAccount().getUserName(), account);
 	   }
 	

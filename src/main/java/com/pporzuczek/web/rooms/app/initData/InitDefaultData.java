@@ -10,8 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.pporzuczek.web.rooms.app.model.Account;
 import com.pporzuczek.web.rooms.app.model.Organization;
+import com.pporzuczek.web.rooms.app.model.Room;
+import com.pporzuczek.web.rooms.app.model.Unit;
 import com.pporzuczek.web.rooms.app.service.AccountService;
 import com.pporzuczek.web.rooms.app.service.OrganizationService;
+import com.pporzuczek.web.rooms.app.service.RoomService;
+import com.pporzuczek.web.rooms.app.service.UnitService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,16 +29,25 @@ public class InitDefaultData {
 	@Autowired
 	private OrganizationService organizationService;
 	
+	@Autowired
+	private UnitService unitService;
+	
+	@Autowired
+	private RoomService roomService;
+	
 	@PostConstruct
 	private void initDefaultData() {
 		log.debug("Init default start");
-		
-		/*
+		///*
 		List<Organization> organizations = new ArrayList<Organization>();
 		Organization organization;
 		
 		organization = new Organization();
-		organization.setName("Rooms Company");
+		organization.setName("Rooms");
+		organizations.add(organization);
+		
+		organization = new Organization();
+		organization.setName("Other Company");
 		organizations.add(organization);
 		
 		for(Organization o : organizations) {        
@@ -45,11 +58,11 @@ public class InitDefaultData {
 		Account account;
 		
 		account = new Account();
-		account.setUserName("piopor");
-		account.setPassword("piopor4321");
-		account.setEmail("piotrporzuczek@outlook.com");
-		account.setFirstName("Piotr");
-		account.setLastName("Porzuczek");
+		account.setUserName("admin");
+		account.setPassword("admin");
+		account.setEmail("admin@admin.com");
+		account.setFirstName("Admin");
+		account.setLastName("Admin");
 		account.setRole("ROLE_ADMIN");
 		account.setAddress("");
 		account.setCompanyName("Rooms");
@@ -57,36 +70,12 @@ public class InitDefaultData {
 		accounts.add(account);
 		
 		account = new Account();
-		account.setUserName("agndzi");
-		account.setPassword("agndzi4321");
-		account.setEmail("agnieszka.dorota.dzieciol@gmail.com");
-		account.setFirstName("Agnieszka");
-		account.setLastName("Dzięcioł");
-		account.setRole("ROLE_ADMIN");
-		account.setAddress("");
-		account.setCompanyName("Rooms");
-		account.setOrganization(organizations.get(0));
-		accounts.add(account);
-		
-		account = new Account();
-		account.setUserName("aneewe");
-		account.setPassword("aneewe4321");
-		account.setEmail("aneta.ewertowska@gmail.com");
-		account.setFirstName("Aneta");
-		account.setLastName("Ewertowska");
-		account.setRole("ROLE_ADMIN");
-		account.setAddress("");
-		account.setCompanyName("Rooms");
-		account.setOrganization(organizations.get(0));
-		accounts.add(account);
-		
-		account = new Account();
-		account.setUserName("matkwi");
-		account.setPassword("matkwi4321");
-		account.setEmail("songoas@gmail.com");
-		account.setFirstName("Mateusz");
-		account.setLastName("Kwiatkowski");
-		account.setRole("ROLE_ADMIN");
+		account.setUserName("user");
+		account.setPassword("user");
+		account.setEmail("user@user.com");
+		account.setFirstName("User");
+		account.setLastName("User");
+		account.setRole("ROLE_USER");
 		account.setAddress("");
 		account.setCompanyName("Rooms");
 		account.setOrganization(organizations.get(0));
@@ -96,13 +85,68 @@ public class InitDefaultData {
 			accountService.register(a);
 		}
 		
+		List<Unit> units = new ArrayList<Unit>();
+		Unit unit;
 		
-//		List<Organization> org = organizationService.list();
-//		for (Organization o : org) {
-//			System.out.println(String.valueOf(o.getAccount().size()));
-//		}
-		*/
+		unit = new Unit();
+		unit.setName("Building A");
+		unit.setAddress("Armii Krajowej 101 81-824 Sopot");
+		unit.setOrganization(organizations.get(0));
+		units.add(unit);
 		
+		unit = new Unit();
+		unit.setName("Building B");
+		unit.setAddress("Armii Krajowej 101 81-824 Sopot");
+		unit.setOrganization(organizations.get(0));
+		units.add(unit);
+		
+		for(Unit u : units) {        
+			unitService.add(u);
+		}
+		
+		List<Room> rooms = new ArrayList<Room>();
+		Room room;
+		
+		room = new Room();
+		room.setName("Room 1");
+		room.setPositions(10);
+		room.setComputers(1);
+		room.setBoard("NO");
+		room.setConditioning("NO");
+		room.setNetwork("YES");
+		room.setProjector("NO");
+		room.setSpeakers("NO");
+		room.setUnit(unitService.findByName("Building A"));
+		rooms.add(room);
+		
+		room = new Room();
+		room.setName("Room 2");
+		room.setPositions(30);
+		room.setComputers(30);
+		room.setBoard("YES");
+		room.setConditioning("NO");
+		room.setNetwork("YES");
+		room.setProjector("NO");
+		room.setSpeakers("NO");
+		room.setUnit(unitService.findByName("Building A"));
+		rooms.add(room);
+
+		room = new Room();
+		room.setName("Room 333");
+		room.setPositions(50);
+		room.setComputers(1);
+		room.setBoard("YES");
+		room.setConditioning("NO");
+		room.setNetwork("YES");
+		room.setProjector("NO");
+		room.setSpeakers("NO");
+		room.setUnit(unitService.findByName("Building B"));
+		rooms.add(room);
+		
+		for(Room r : rooms) {        
+			roomService.add(r);
+		}
+		//*/
 		log.debug("Init default done");
 	}
 }

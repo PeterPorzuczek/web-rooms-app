@@ -156,7 +156,7 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/event/edit/{id}", method=RequestMethod.GET)
-	public String eventEdit(@PathVariable("id") Long id, Model model) {
+	public String room(@PathVariable("id") Long id, Model model) {
 		Account a = accountService.getLoggedInAccount();
 		Event e = this.eventService.findById(id);
 		if (a.getId().equals(e.getAccount().getId()) || a.isAdmin()) {
@@ -205,22 +205,6 @@ public class EventController {
 		return content;
 	}
 	
-	@RequestMapping("/calendar/room")
-	public String organization(Model model) {
-        model.addAttribute("rooms", roomService.listTablePublic("Uniwersystet Gdański - Wydział Zarządzania"));
-		return "calendar/room";
-	}
-	
-	@RequestMapping(value="/calendar/room/{id}", method=RequestMethod.GET)
-	public String room(@PathVariable("id") Long id, Model model) {
-		Room r = roomService.findById(id);
-		if(r.getUnit().getOrganization().getName().startsWith("Uniwersystet Gdański - Wydział Zarządzania")) {
-					model.addAttribute("room", r);
-		}
-		return "/calendar/calendar";
-	}
-	
-
 	@RequestMapping("/book/unit")
 	public String bookOrganization(Model model) {
 		Account a = accountService.getLoggedInAccount();
@@ -255,5 +239,21 @@ public class EventController {
 			}
 		}
 		return "/book/calendar";
+	}
+	
+	
+	@RequestMapping("/calendar/room")
+	public String checkOrganization(Model model) {
+        model.addAttribute("rooms", roomService.listTablePublic("Uniwersystet Gdański - Wydział Zarządzania"));
+		return "calendar/room";
+	}
+	
+	@RequestMapping(value="/calendar/room/{id}", method=RequestMethod.GET)
+	public String checkRoom(@PathVariable("id") Long id, Model model) {
+		Room r = roomService.findById(id);
+		if(r.getUnit().getOrganization().getName().startsWith("Uniwersystet Gdański - Wydział Zarządzania")) {
+					model.addAttribute("room", r);
+		}
+		return "/calendar/calendar";
 	}
 }

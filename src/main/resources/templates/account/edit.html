@@ -52,7 +52,7 @@
 
 							<fieldset>
 							
-								<div>
+								<div sec:authorize="hasRole('ROLE_ADMIN')">
 									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Role</h4>
 
 									<p class="cd-select icon">
@@ -64,7 +64,7 @@
 									</p>
 								</div> 
 								
-								<div>
+								<div sec:authorize="hasRole('ROLE_ADMIN')">
 									<h4 sec:authorize="hasRole('ROLE_ADMIN')">Organization</h4>
 
 									<p class="cd-select icon">
@@ -74,8 +74,9 @@
 										</select>
 									</p>
 								</div> 
-								<input type="hidden" th:field="*{organization.id}" sec:authorize="hasRole('ROLE_USER')" />
-								<input type="hidden" th:field="*{userName}"/>
+								
+								<input sec:authorize="hasRole('ROLE_USER')" type="hidden" th:field="*{organization.id}" />
+								<input sec:authorize="hasRole('ROLE_ADMIN')" type="hidden" th:field="*{userName}"/>
             					<input type="hidden" th:field="*{id}"/>
             					
 								<div>
