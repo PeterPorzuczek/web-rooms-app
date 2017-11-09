@@ -8,11 +8,11 @@ Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Ca
 	<img src="http://i.imgur.com/nd611B5.gif" alt="app-preview" width="640" height="360">
 </div>
 
-To run application use
+To run application
 ----
 	$ ./mvnw spring-boot:run
 
-To compile application use
+To compile application
 ----
 	$ ./mvnw clean install
 ----
