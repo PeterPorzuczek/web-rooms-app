@@ -5,7 +5,7 @@ Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Ca
 
 # Preview
 <div>
-	<img src="http://i.imgur.com/nd611B5.gif" alt="app-preview" width="640" height="360">
+	<img src="http://i.imgur.com/nd611B5.gif" alt="app-preview" width="70%" height="70%">
 </div>
 
 To run application
