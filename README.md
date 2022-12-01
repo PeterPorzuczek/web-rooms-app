@@ -1,7 +1,7 @@
 Rooms App
 ========
 Rooms is a web based booking software package that makes it easy for you to manage rooms and resources. 
-Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Calendar plugin.
+Project done in Java with Spring Boot, JPA(Hibernate), Maven, Lombok and Full Calendar plugin. This is simple CRUD application.
 
 # Preview
 <div>
