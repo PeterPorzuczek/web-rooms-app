@@ -18,8 +18,8 @@
             <div th:text="${message}">No Message</div>
             <div th:text="${exception}">No exception</div>
             <div th:if="${account}" th:text="${account.userName}"></div>
-            <div th:if="${account}" th:text="${account.email}"></div>
             <div th:if="${account}" th:text="${account.lastLogin}"></div>
+            <div th:if="${account}" th:text="${account.email}"></div>
             <div th:if="${url}" th:text="${url}">No url available</div>
             <div>Please contact <a th:if="${support}" th:href="@{mailto:{mail}(mail=${support},subject=${exception},body=${message})}">support</a> with the above information.</div>
 				<p class='hmpg'>

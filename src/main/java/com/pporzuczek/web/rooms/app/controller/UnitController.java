@@ -39,6 +39,7 @@ public class UnitController {
 	@RequestMapping("/unit/list")
 	public String list(ModelMap map) {
 	   map.addAttribute("units", unitService.listTable());
+
 	   return "unit/list";
 	}
 	
@@ -61,6 +62,7 @@ public class UnitController {
 	public String add(Unit unit, Model model) {
 		List<Organization> organizationList = organizationService.list();
 		model.addAttribute("organizationList", organizationList);
+
 	   return "/unit/add";
 	}
 	
@@ -68,6 +70,7 @@ public class UnitController {
 	public String addPost(@Valid Unit unit, BindingResult result, Model model) {
 		List<Organization> organizationList = organizationService.list();
 		model.addAttribute("organizationList", organizationList);
+
 	   if (result.hasErrors()) {
 	       return "unit/add";
 	   }
@@ -118,6 +121,7 @@ public class UnitController {
 	@RequestMapping("/unit/delete")
 	public String delete(Long id) {
 		unitService.delete(id);
+
 		return "redirect:/unit/list";
 	}
 	

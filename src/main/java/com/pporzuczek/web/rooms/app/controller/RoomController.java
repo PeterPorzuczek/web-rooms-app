@@ -56,6 +56,7 @@ public class RoomController {
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String content = gson.toJson(roomService.listExport());
+
 		return content;
 	}
 	
@@ -63,6 +64,7 @@ public class RoomController {
 	public String add(Room room, Model model) {
 		List<Unit> unitList = unitService.list();
 		model.addAttribute("unitList", unitList);
+
 	   return "/room/add";
 	}
 	
@@ -70,11 +72,13 @@ public class RoomController {
 	public String addPost(@Valid Room room, BindingResult result, Model model) {
 		List<Unit> unitList = unitService.list();
 		model.addAttribute("unitList", unitList);
+
 	   if (result.hasErrors()) {
 	       return "room/add";
 	   }
 	   
 	   Room registeredRoom = roomService.add(room);
+
 	   if (registeredRoom != null) {
 	      return "redirect:/room/list";
 	   } else {
@@ -126,6 +130,7 @@ public class RoomController {
 	@RequestMapping("/room/delete")
 	public String delete(Long id) {
 		roomService.delete(id);
+
 	   return "redirect:/room/list";
 	}
 }

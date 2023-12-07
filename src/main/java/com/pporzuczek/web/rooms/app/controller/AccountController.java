@@ -53,18 +53,21 @@ public class AccountController {
 	@RequestMapping("/")
 	public String home(Map<String, Object> model) {
         model.put("date", new Date());
+
 		return "home";
 	}
 	
 	@RequestMapping("/account/list")
 	public String list(ModelMap map) {
 	   map.addAttribute("accounts", accountService.listTable());
+
 	   return "account/list";
 	}
 	
 	@RequestMapping("/account/list/group")
 	public String listGroup(ModelMap map) {
 	   map.addAttribute("accounts", accountService.listTableGroup());
+
 	   return "account/listgroup";
 	}
 	
@@ -83,6 +86,7 @@ public class AccountController {
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String content = gson.toJson(accountService.listExport());
+
 		return content;
 	}
 	
@@ -106,24 +110,28 @@ public class AccountController {
 	   }
 	   
 	   Account registeredAccount = accountService.register(account);
+
 	   if (registeredAccount != null) {
 	       return "redirect:/account/list";
 	   } else {
 	       log.error("Account already exists: " + account.getUserName());
 	       result.rejectValue("email", "error.alreadyExists", "This username or email already exists, please try to reset password instead.");
-	       return "account/register";
+	       
+		   return "account/register";
 	   }
 	}
 	
 	@RequestMapping("/account/delete")
 	public String delete(Long id) {
 		accountService.delete(id);
+
 	   return "redirect:/account/list";
 	}
 	
 	@RequestMapping("/account/autologin")
 	public String autoLogin(Account account) {
 		accountService.autoLogin(account.getUserName());
+
 	   return "redirect:/";
 	}
 	

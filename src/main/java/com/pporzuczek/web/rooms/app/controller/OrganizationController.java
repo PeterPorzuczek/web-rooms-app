@@ -32,6 +32,7 @@ public class OrganizationController {
 	@RequestMapping("/organization/list")
 	public String list(ModelMap map) {
 	   map.addAttribute("organizations", organizationService.listTable());
+
 	   return "organization/list";
 	}
 
@@ -101,6 +102,7 @@ public class OrganizationController {
 	@RequestMapping("/organization/delete")
 	public String delete(Long id) {
 		organizationService.delete(id);
+
 	   return "redirect:/organization/list";
 	}
 

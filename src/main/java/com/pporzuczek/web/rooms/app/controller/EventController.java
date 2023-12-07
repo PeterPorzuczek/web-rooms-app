@@ -44,6 +44,7 @@ public class EventController {
 	@RequestMapping(value="/calendar/addevent", method=RequestMethod.POST)
 	public @ResponseBody Event addEvent(@RequestBody Event event) {
 		Account a = accountService.getLoggedInAccount();
+
 		if (a.getId().equals(event.getAccount().getId()) || a.isAdmin()) {
 			return eventService.add(event);
 		} else {
@@ -54,6 +55,7 @@ public class EventController {
 	@RequestMapping(value="/calendar/updateevent", method=RequestMethod.PATCH)
 	public @ResponseBody Event updateEvent(@RequestBody Event event) {
 		Account a = accountService.getLoggedInAccount();
+
 		if (a.getId().equals(event.getAccount().getId())){
 			return eventService.update(event);
 		} else {
@@ -106,6 +108,7 @@ public class EventController {
 				events.get(i).setAccount(null);
 			}
 		}
+
 		return events;
 	}
 	
@@ -115,6 +118,7 @@ public class EventController {
 		if (a.getId().equals(eventService.findById(id).getAccount().getId()) || a.isAdmin()) { 
 			eventService.delete(id);
 		}
+
 		return "redirect:/event/list/";
 	}
 	
@@ -125,6 +129,7 @@ public class EventController {
 			for (Event e : events) {
 				eventService.delete(e.getId());
 			}
+
 		return "redirect:/event/list/";
 	}
 		
@@ -134,6 +139,7 @@ public class EventController {
 		if (a.isAdmin()) {
 			eventService.delete(id);
 		}
+
 		return "redirect:/event/list/all";
 	}
 	
@@ -141,12 +147,14 @@ public class EventController {
 	public String list(Model model) {
 		Account a = accountService.getLoggedInAccount();
         model.addAttribute("events", eventService.listTable(a));
+
 		return "event/list";
 	}
 	
 	@RequestMapping("/event/list/all")
 	public String listall(Model model) {
 		Account a = accountService.getLoggedInAccount();
+
         if (a.isAdmin()) {
         	 model.addAttribute("events", eventService.listTable());
         	 return "event/listall";
@@ -159,9 +167,11 @@ public class EventController {
 	public String room(@PathVariable("id") Long id, Model model) {
 		Account a = accountService.getLoggedInAccount();
 		Event e = this.eventService.findById(id);
+
 		if (a.getId().equals(e.getAccount().getId()) || a.isAdmin()) {
 			model.addAttribute("room", e.getRoom());
 			model.addAttribute("evente", this.eventService.findById(id));
+
 			return "/event/calendar";
 		} else{
 			return "redirect:/";
@@ -183,6 +193,7 @@ public class EventController {
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String content = gson.toJson(eventService.listExport(null));
+
 		return content;
 	}
 	
@@ -202,6 +213,7 @@ public class EventController {
 		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String content = gson.toJson(eventService.listExport(a));
+
 		return content;
 	}
 	
@@ -209,6 +221,7 @@ public class EventController {
 	public String bookOrganization(Model model) {
 		Account a = accountService.getLoggedInAccount();
         model.addAttribute("units", unitService.listTable(a.getOrganization()));
+
 		return "book/unit";
 	}
 	
@@ -222,6 +235,7 @@ public class EventController {
 				model.addAttribute("rooms", roomService.listTable(u.getId()));
 			}
 		}
+
 	   return "/book/room";
 	}
 	
@@ -238,6 +252,7 @@ public class EventController {
 				}
 			}
 		}
+
 		return "/book/calendar";
 	}
 	
@@ -245,6 +260,7 @@ public class EventController {
 	@RequestMapping("/calendar/room")
 	public String checkOrganization(Model model) {
         model.addAttribute("rooms", roomService.listTablePublic("Uniwersystet Gdański - Wydział Zarządzania"));
+
 		return "calendar/room";
 	}
 	
@@ -254,6 +270,7 @@ public class EventController {
 		if(r.getUnit().getOrganization().getName().startsWith("Uniwersystet Gdański - Wydział Zarządzania")) {
 					model.addAttribute("room", r);
 		}
+
 		return "/calendar/calendar";
 	}
 }
